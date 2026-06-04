@@ -1,0 +1,14 @@
+from rest_framework import generics
+from .serializers import RegisterSerializer
+from .models import User
+from wallet.models import Wallet
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+
+    def perform_create(self, serializer):
+        user = serializer.save()
+
+        # AUTO WALLET CREATION (important)
+        Wallet.objects.create(user=user, currency='USD', balance=0)

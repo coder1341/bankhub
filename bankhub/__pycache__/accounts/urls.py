@@ -1,9 +1,11 @@
+from django.contrib import admin
 from django.urls import path
-from .views import RegisterView
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from .views import home
+from customer.views import dashboard, deposit
 
 urlpatterns = [
-    path('register/', RegisterView.as_view()),
-    path('login/', TokenObtainPairView.as_view()),
-    path('refresh/', TokenRefreshView.as_view()),
+    path('admin/', admin.site.urls),
+    path('', home, name='home'),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('deposit/', deposit, name='deposit'),
 ]

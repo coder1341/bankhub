@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deposit Funds</title>
+</head>
+<body>
+
+<h1>Deposit Funds</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <input
+        type="number"
+        name="amount"
+        placeholder="Enter Amount"
+        required>
+
+    <button type="submit">
+        Deposit
+    </button>
+
+</form>
+
+</body>
+</html>

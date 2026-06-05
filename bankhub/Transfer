@@ -1,0 +1,79 @@
+def transfer(request):
+    sender = Wallet.objects.first()
+
+    if request.method == "POST":
+
+        account_number = request.POST.get("account_number")
+        amount = Decimal(request.POST.get("amount"))
+
+        try:
+            receiver = Wallet.objects.get(
+                account_number=account_number
+            )
+
+            if amount <= sender.balance:
+
+                sender.balance -= amount
+                sender.save()
+
+                receiver.balance += amount
+                receiver.save()
+
+                Transaction.objects.create(
+                    wallet=sender,
+                    transaction_type="Transfer Sent",
+                    amount=amount
+                )
+
+                Transaction.objects.create(
+                    wallet=receiver,
+                    transaction_type="Transfer Received",
+                    amount=amount
+                )
+
+                return redirect("dashboard")
+
+        except Wallet.DoesNotExist:
+            pass
+
+    return render(request, "transfer.html")
+
+    def transfer(request):
+    sender = Wallet.objects.first()
+
+    if request.method == "POST":
+
+        account_number = request.POST.get("account_number")
+        amount = Decimal(request.POST.get("amount"))
+
+        try:
+            receiver = Wallet.objects.get(
+                account_number=account_number
+            )
+
+            if amount <= sender.balance:
+
+                sender.balance -= amount
+                sender.save()
+
+                receiver.balance += amount
+                receiver.save()
+
+                Transaction.objects.create(
+                    wallet=sender,
+                    transaction_type="Transfer Sent",
+                    amount=amount
+                )
+
+                Transaction.objects.create(
+                    wallet=receiver,
+                    transaction_type="Transfer Received",
+                    amount=amount
+                )
+
+                return redirect("dashboard")
+
+        except Wallet.DoesNotExist:
+            pass
+
+    return render(request, "transfer.html")

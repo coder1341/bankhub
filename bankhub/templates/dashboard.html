@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BankHub Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+body{
+    background:#f8fafc;
+}
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:260px;
+    background:#0f172a;
+    color:white;
+    padding:25px;
+    border-right:none;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#60a5fa;
+    margin-bottom:30px;
+}
+
+.profile{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2563eb,#1e3a8a);
+    color:white;
+    font-size:35px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    margin-bottom:15px;
+}
+
+.profile h3{
+    margin-bottom:5px;
+}
+
+.profile p{
+    color:gray;
+    font-size:14px;
+}
+
+.menu a{
+    display:block;
+    text-decoration:none;
+    color:#333;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:8px;
+}
+
+.menu a:hover{
+    background:#edf3ff;
+    color:#0a49ff;
+}
+
+.main{
+    flex:1;
+    padding:30px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.top-icons{
+    font-size:24px;
+}
+
+.small-card,
+.transactions,
+.stats{
+    transition:.3s;
+}
+
+.small-card:hover,
+.transactions:hover,
+.stats:hover{
+    transform:translateY(-5px);
+}
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+
+.balance-card{box-shadow:0 25px 50px rgba(37,99,235,.35);
+    background:linear-gradient(135deg,#0052ff,#001d7c);
+    color:white;
+    border-radius:25px;
+    padding:35px;
+    margin-bottom:25px;
+}
+
+.balance-card h1{
+    font-size:50px;
+    margin:15px 0;
+}
+
+.account-box{
+    background:rgba(255,255,255,.1);
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
+}
+
+.actions{
+    margin-top:20px;
+}
+
+.actions button{
+    border:none;
+    padding:12px 25px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-right:10px;
+    font-weight:bold;
+}
+
+.deposit{
+    background:white;
+    color:#0a49ff;
+}
+
+.transfer{
+    background:#3d7bff;
+    color:white;
+}
+
+.withdraw{
+    background:#1f4bd8;
+    color:white;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.transactions,
+.stats{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+
+.transaction{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.stat{
+    margin-bottom:20px;
+}
+
+.amount{
+    color:green;
+    font-weight:bold;
+}
+
+@media(max-width:900px){
+
+    .wrapper{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+    .top-cards{
+        grid-template-columns:1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="sidebar">
+
+<div class="logo">
+🏦 BankHub
+</div>
+
+<div class="profile">
+
+<div class="avatar">
+    {{ wallet.user.username|slice:":1"|upper }}
+</div>
+
+<h3>{{ wallet.user.username }}</h3>
+
+<p>✔ Verified Account</p>
+
+</div>
+
+<div class="menu">
+
+<a href="#">🏠 Dashboard</a>
+<a href="#">💸 Transactions</a>
+<a href="#">💳 Cards</a>
+<a href="#">📥 Deposit</a>
+<a href="#">📤 Withdraw</a>
+<a href="#">🔄 Transfer</a>
+<a href="#">⚙ Settings</a>
+
+</div>
+
+</div>
+
+<div class="main">
+    <div class="top-icons">
+
+    🔔
+
+    <span style="
+    background:#2563eb;
+    color:white;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+    margin-left:15px;">
+        {{ wallet.user.username }}
+    </span>
+
+</div>
+
+<div class="top-cards">
+
+<div class="small-card">
+<h4>Current Balance</h4>
+<h2>${{ wallet.balance }} USD</h2>
+</div>
+
+<div class="small-card">
+<h4>Monthly Income</h4>
+<h2>₦0</h2>
+</div>
+
+<div class="small-card">
+<h4>Monthly Outgoing</h4>
+<h2>₦0</h2>
+</div>
+
+<div class="small-card">
+<h4>Transaction Limit</h4>
+<h2>₦500,000</h2>
+</div>
+
+</div>
+
+<div class="balance-card">
+
+<h3>Good Afternoon, {{ wallet.user.username }} 👋</h3>
+
+<h2>{{ wallet.user.username }}</h2>
+
+<h1 id="balance">${{ wallet.balance }}</h1>
+
+<button id="toggleBalance" style="
+margin-top:10px;
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;">
+👁 Hide Balance
+</button>
+
+<div class="account-box">
+
+<h3>BANKHUB PREMIUM</h3>
+
+<br>
+
+<p>ACCOUNT NUMBER</p>
+
+<h2>{{ wallet.account_number }}</h2>
+
+<br>
+
+<p>CARD HOLDER</p>
+
+<h3>{{ wallet.user.username }}</h3>
+
+</div>
+
+<div class="actions">
+
+<button class="deposit">➕ Deposit</button>
+
+<button class="transfer">🔄 Transfer</button>
+
+<button class="withdraw">💸 Withdraw</button>
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="transactions">
+
+<h2>Recent Transactions</h2>
+
+<div class="transaction">
+
+<div>
+    <strong>Salary Deposit</strong>
+    <p>Today</p>
+</div>
+
+<span class="amount">+$5,000</span>
+
+</div>
+
+<div class="transaction">
+<span>Netflix Subscription</span>
+<span>-$15</span>
+</div>
+
+<div class="transaction">
+<span>Transfer Received</span>
+<span class="amount">+$1,200</span>
+</div>
+
+<div class="transaction">
+<span>Amazon Purchase</span>
+<span>-$300</span>
+</div>
+
+<div class="transaction">
+<span>Salary Deposit</span>
+<span class="amount">+ ₦50,000</span>
+</div>
+
+<div class="transaction">
+<span>Transfer Sent</span>
+<span>- ₦10,000</span>
+</div>
+
+<div class="transaction">
+<span>Airtime Purchase</span>
+<span>- ₦2,000</span>
+</div>
+
+</div>
+
+<div class="stats">
+
+<h2>Account Statistics</h2>
+
+<div class="stat">
+<h4>Status</h4>
+<p>Active</p>
+</div>
+
+<div class="stat">
+<h4>Pending Transactions</h4>
+<p>0</p>
+</div>
+
+<div class="stat">
+<h4>Account Age</h4>
+<p>1 Day</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const balance = document.getElementById("balance");
+const btn = document.getElementById("toggleBalance");
+
+const originalBalance = balance.innerHTML;
+
+btn.addEventListener("click", () => {
+
+    if(balance.innerHTML === originalBalance){
+
+        balance.innerHTML = "••••••••";
+        btn.innerHTML = "👁 Show Balance";
+
+    }else{
+
+        balance.innerHTML = originalBalance;
+        btn.innerHTML = "👁 Hide Balance";
+
+    }
+
+});
+
+</script>
+</body>
+</html>

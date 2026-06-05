@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction History</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f7fc;
+            padding:40px;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            border-radius:15px;
+            max-width:800px;
+            margin:auto;
+        }
+
+        .transaction{
+            display:flex;
+            justify-content:space-between;
+            padding:12px;
+            border-bottom:1px solid #ddd;
+        }
+
+        h1{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Transaction History</h1>
+
+    {% for transaction in transactions %}
+        <div class="transaction">
+            <span>{{ transaction.transaction_type }}</span>
+            <span>${{ transaction.amount }}</span>
+        </div>
+    {% empty %}
+        <p>No transactions found.</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>

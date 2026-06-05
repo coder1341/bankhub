@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transfer Funds</title>
+
+    <style>
+
+        body{
+            font-family:Arial,sans-serif;
+            background:#f4f7fc;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .card{
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            width:450px;
+            box-shadow:0 5px 20px rgba(0,0,0,.1);
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:25px;
+            color:#0d47ff;
+        }
+
+        input{
+            width:100%;
+            padding:15px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            margin-bottom:15px;
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:10px;
+            background:#0d47ff;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#002fa7;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <h1>💸 Transfer Funds</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="account_number"
+            placeholder="Recipient Account Number"
+            required>
+
+        <input
+            type="number"
+            name="amount"
+            placeholder="Enter Amount"
+            required>
+
+        <button type="submit">
+            Transfer Money
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

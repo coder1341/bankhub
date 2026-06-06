@@ -1,0 +1,11 @@
+from transactions.models import Transaction
+
+def history(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    transactions = Transaction.objects.filter(user=request.user).order_by('-created_at')
+
+    return render(request, "history.html", {
+        "transactions": transactions
+    })

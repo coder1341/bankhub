@@ -1,28 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BankHub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BankHub - Digital Banking</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:#f8fafc;
+    color:#111827;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px 8%;
+    background:white;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+    color:#0a49ff;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+}
+
+.auth-buttons{
+    display:flex;
+    gap:15px;
+}
+
+.login-btn{
+    text-decoration:none;
+    color:#111;
+    font-weight:bold;
+}
+
+.register-btn{
+    text-decoration:none;
+    background:#111827;
+    color:white;
+    padding:12px 25px;
+    border-radius:50px;
+}
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:80px 8%;
+    gap:50px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+    font-size:65px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    color:#6b7280;
+    font-size:20px;
+    margin-bottom:35px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+}
+
+.open-btn{
+    text-decoration:none;
+    background:#facc15;
+    color:black;
+    padding:15px 30px;
+    border-radius:50px;
+    font-weight:bold;
+}
+
+.learn-btn{
+    text-decoration:none;
+    border:2px solid #ddd;
+    color:#333;
+    padding:15px 30px;
+    border-radius:50px;
+}
+
+.hero-image{
+    flex:1;
+    text-align:center;
+}
+
+.phone{
+    width:320px;
+    height:600px;
+    background:white;
+    border-radius:40px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    margin:auto;
+    padding:25px;
+}
+
+.balance-card{
+    background:linear-gradient(135deg,#0a49ff,#002b9a);
+    color:white;
+    border-radius:25px;
+    padding:25px;
+    text-align:left;
+}
+
+.balance-card h2{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.balance-card h1{
+    font-size:38px;
+}
+
+.balance-card p{
+    margin-top:15px;
+    opacity:.8;
+}
+
+.features{
+    padding:80px 8%;
+    background:white;
+}
+
+.features h2{
+    text-align:center;
+    margin-bottom:50px;
+    font-size:40px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.feature{
+    background:#f8fafc;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.feature h3{
+    margin-bottom:10px;
+}
+
+.footer{
+    text-align:center;
+    padding:30px;
+    color:#777;
+}
+
+@media(max-width:900px){
+
+.hero{
+    flex-direction:column;
+}
+
+.hero-text h1{
+    font-size:45px;
+}
+
+}
+
+</style>
+
 </head>
 <body>
 
-    <h1>Welcome to BankHub</h1>
+<nav class="navbar">
 
-    <p>Your Digital Banking Platform</p>
+<div class="logo">
+🏦 BankHub
+</div>
 
-    <hr>
+<div class="nav-links">
+<a href="#">Products</a>
+<a href="#">Services</a>
+<a href="#">Support</a>
+</div>
 
-    <h2>Features</h2>
+<div class="auth-buttons">
+<a href="{% url 'login' %}" class="login-btn">Login</a>
+<a href="{% url 'register' %}" class="register-btn">Open Account</a>
+</div>
 
-    <ul>
-        <li>Create Account</li>
-        <li>Secure Login</li>
-        <li>View Balance</li>
-        <li>Transfer Funds</li>
-        <li>Transaction History</li>
-        <li>Coupon Purchase System</li>
-    </ul>
+</nav>
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>
+Control Your Financial Future Easily
+</h1>
+
+<p>
+Secure digital banking with instant transfers,
+real-time balance tracking and transaction history.
+</p>
+
+<div class="hero-buttons">
+
+<a href="{% url 'register' %}" class="open-btn">
+Open Account
+</a>
+
+<a href="{% url 'login' %}" class="learn-btn">
+Login
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-image">
+
+<div class="phone">
+
+<div class="balance-card">
+
+<h2>Available Balance</h2>
+
+<h1>$500,000</h1>
+
+<p>
+BankHub Digital Banking
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="features">
+
+<h2>Why Choose BankHub?</h2>
+
+<div class="feature-grid">
+
+<div class="feature">
+<h3>🔒 Secure Banking</h3>
+<p>Advanced account protection and security.</p>
+</div>
+
+<div class="feature">
+<h3>💸 Instant Transfers</h3>
+<p>Send money quickly between accounts.</p>
+</div>
+
+<div class="feature">
+<h3>📈 Transaction History</h3>
+<p>Track every payment and transfer.</p>
+</div>
+
+<div class="feature">
+<h3>🏦 Digital Wallet</h3>
+<p>Manage your funds from anywhere.</p>
+</div>
+
+</div>
+
+</section>
+
+<div class="footer">
+© 2026 BankHub. All Rights Reserved.
+</div>
 
 </body>
 </html>

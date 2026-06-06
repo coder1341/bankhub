@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3 bg-white p-4 shadow">
+
+<h3>Withdraw</h3>
+
+{% if error %}
+<p style="color:red">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="number" name="amount" class="form-control mb-2" placeholder="Amount">
+    <button class="btn btn-danger w-100">Withdraw</button>
+</form>
+
+</div>
+{% endblock %}

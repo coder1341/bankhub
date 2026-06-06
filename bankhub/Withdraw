@@ -1,0 +1,22 @@
+    @login_required
+    def withdraw(request):
+    wallet = Wallet.objects.get(user=request.user)
+
+    if request.method == "POST":
+
+        amount = Decimal(request.POST.get("amount"))
+
+        if amount <= wallet.balance:
+
+            wallet.balance -= amount
+            wallet.save()
+
+            Transaction.objects.create(
+                wallet=wallet,
+                transaction_type="Withdraw",
+                amount=amount
+            )
+
+            return redirect("dashboard")
+
+    return render(request, "withdraw.html")

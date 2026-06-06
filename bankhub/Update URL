@@ -1,0 +1,3 @@
+path('deposit/', deposit, name="deposit"),
+path('withdraw/', withdraw, name="withdraw"),
+path('transfer/', transfer, name="transfer"),

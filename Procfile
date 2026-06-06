@@ -1,0 +1,1 @@
+web: gunicorn bankhub.wsgi:application

@@ -1,0 +1,22 @@
+def deposit(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    wallet = Wallet.objects.get(user=request.user)
+
+    if request.method == "POST":
+        amount = float(request.POST["amount"])
+
+        wallet.balance += amount
+        wallet.save()
+
+        Transaction.objects.create(
+            user=request.user,
+            amount=amount,
+            transaction_type="deposit",
+            description="Wallet deposit"
+        )
+
+        return redirect("dashboard")
+
+    return render(request, "deposit.html")

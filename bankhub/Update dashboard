@@ -1,0 +1,3 @@
+<a href="/deposit/" class="btn btn-success mb-2">Deposit</a>
+<a href="/withdraw/" class="btn btn-danger mb-2">Withdraw</a>
+<a href="/transfer/" class="btn btn-primary mb-2">Transfer</a>

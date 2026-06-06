@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card p-3 shadow">
+            <h5>Wallet Balance</h5>
+            <h2>₦0.00</h2>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card p-3 shadow">
+            <h5>Quick Actions</h5>
+
+            <a href="#" class="btn btn-primary mb-2">Deposit</a>
+            <a href="#" class="btn btn-danger mb-2">Withdraw</a>
+            <a href="#" class="btn btn-dark">Transfer</a>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

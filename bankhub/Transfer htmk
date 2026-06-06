@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3 bg-white p-4 shadow">
+
+<h3>Transfer Money</h3>
+
+{% if error %}
+<p style="color:red">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username" class="form-control mb-2" placeholder="Receiver Username">
+    <input type="number" name="amount" class="form-control mb-2" placeholder="Amount">
+
+    <button class="btn btn-primary w-100">Send</button>
+</form>
+
+</div>
+{% endblock %}

@@ -109,19 +109,38 @@ body{
 .stats:hover{
     transform:translateY(-5px);
 }
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 3px 10px rgba(0,0,0,.05);
-}
+    
+    <div class="top-row">
+        <div>
+            <p>Good Afternoon</p>
+            <h2>{{ wallet.user.username }}</h2>
+        </div>
 
-.balance-card{box-shadow:0 25px 50px rgba(37,99,235,.35);
-    background:linear-gradient(135deg,#0052ff,#001d7c);
-    color:white;
-    border-radius:25px;
-    padding:35px;
-    margin-bottom:25px;
-}
+        <div id="clock">
+            15:18:38
+        </div>
+    </div>
+
+    <h3>Available Balance</h3>
+
+    <h1 id="balance">
+        ${{ wallet.balance }}
+    </h1>
+
+    <div class="account-box">
+
+        <div>
+            <small>Your Account Number</small>
+            <h3>{{ wallet.account_number }}</h3>
+        </div>
+
+        <div>
+            <button class="white-btn">Transactions</button>
+            <button class="blue-btn">Top Up</button>
+        </div>
+
+    </div>
+</div>
 
 .balance-card h1{
     font-size:50px;
@@ -239,12 +258,12 @@ body{
 
 <div class="menu">
 
-<a href="#">🏠 Dashboard</a>
-<a href="#">💸 Transactions</a>
+<a href="{% url 'dashboard' %}">🏠 Dashboard</a>
+<a href="{% url 'transactions' %}">💸 Transactions</a>
 <a href="#">💳 Cards</a>
-<a href="#">📥 Deposit</a>
-<a href="#">📤 Withdraw</a>
-<a href="#">🔄 Transfer</a>
+<a href="{% url 'deposit' %}">📥 Deposit</a>
+<a href="{% url 'withdraw' %}">📤 Withdraw</a>
+<a href="{% url 'transfer' %}">🔄 Transfer</a>
 <a href="#">⚙ Settings</a>
 
 </div>
@@ -277,24 +296,24 @@ body{
 
 <div class="small-card">
 <h4>Monthly Income</h4>
-<h2>₦0</h2>
+<h2>$0</h2>
 </div>
 
 <div class="small-card">
 <h4>Monthly Outgoing</h4>
-<h2>₦0</h2>
+<h2>$0</h2>
 </div>
 
 <div class="small-card">
 <h4>Transaction Limit</h4>
-<h2>₦500,000</h2>
+<h2>$500,000</h2>
 </div>
 
 </div>
 
 <div class="balance-card">
 
-<h3>Good Afternoon, {{ wallet.user.username }} 👋</h3>
+<h3>Good Day, {{ wallet.user.username }} 👋</h3>
 
 <h2>{{ wallet.user.username }}</h2>
 
@@ -330,11 +349,17 @@ font-weight:bold;">
 
 <div class="actions">
 
-<button class="deposit">➕ Deposit</button>
+<a href="{% url 'deposit' %}">
+    <button class="deposit">➕ Deposit</button>
+</a>
 
-<button class="transfer">🔄 Transfer</button>
+<a href="{% url 'transfer' %}">
+    <button class="transfer">🔄 Transfer</button>
+</a>
 
-<button class="withdraw">💸 Withdraw</button>
+<a href="{% url 'withdraw' %}">
+    <button class="withdraw">💸 Withdraw</button>
+</a>
 
 </div>
 
@@ -374,17 +399,17 @@ font-weight:bold;">
 
 <div class="transaction">
 <span>Salary Deposit</span>
-<span class="amount">+ ₦50,000</span>
+<span class="amount">+ $50,000</span>
 </div>
 
 <div class="transaction">
 <span>Transfer Sent</span>
-<span>- ₦10,000</span>
+<span>- $10,000</span>
 </div>
 
 <div class="transaction">
 <span>Airtime Purchase</span>
-<span>- ₦2,000</span>
+<span>- $2,000</span>
 </div>
 
 </div>

@@ -1,78 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile</title>
+<title>My Profile - BankHub</title>
 
 <style>
 
-body{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Segoe UI,sans-serif;
-background:#f5f7fb;
+}
+
+body{
+background:linear-gradient(135deg,#eef4ff,#f8fbff);
 padding:20px;
 }
 
 .card{
-background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 3px 10px rgba(0,0,0,.1);
-max-width:500px;
+max-width:700px;
 margin:auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 15px 35px rgba(10,73,255,.12);
+}
+
+.header{
+background:linear-gradient(135deg,#0A49FF,#002B9A);
+padding:35px;
+text-align:center;
+color:white;
 }
 
 .avatar{
-width:120px;
-height:120px;
+width:130px;
+height:130px;
 border-radius:50%;
 background:#dbeafe;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:50px;
+font-size:55px;
+font-weight:bold;
+color:#0A49FF;
 margin:auto;
+border:5px solid white;
 }
 
-h2{
-text-align:center;
+.profile-photo{
+width:130px;
+height:130px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:auto;
+border:5px solid white;
+}
+
+.username{
 margin-top:15px;
+font-size:24px;
+font-weight:bold;
+}
+
+.status{
+margin-top:8px;
+background:#16A34A;
+display:inline-block;
+padding:8px 15px;
+border-radius:20px;
+font-size:14px;
+}
+
+.content{
+padding:30px;
+}
+
+.section-title{
+color:#0A49FF;
+margin-bottom:15px;
+font-size:22px;
 }
 
 .info{
-margin-top:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
 }
 
-.info p{
-padding:10px 0;
-border-bottom:1px solid #eee;
+.item{
+background:#f8fbff;
+padding:15px;
+border-radius:12px;
+border:1px solid #EAF2FF;
 }
 
-.photo-link{
+.label{
+font-size:13px;
+color:#6B7280;
+margin-bottom:5px;
+}
+
+.value{
+font-weight:600;
+}
+
+.photo-btn{
 display:block;
 text-align:center;
-margin-top:15px;
+background:linear-gradient(135deg,#0A49FF,#002B9A);
+color:white;
+padding:14px;
+border-radius:12px;
+text-decoration:none;
+margin:20px 0;
+font-weight:bold;
+}
+
+@media(max-width:768px){
+
+.info{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
 </head>
-
 <body>
 
 <div class="card">
+
+<div class="header">
 
 {% if wallet.profile_picture %}
 
 <img
 src="{{ wallet.profile_picture.url }}"
-style="
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-display:block;
-margin:auto;
-">
+class="profile-photo">
 
 {% else %}
 
@@ -82,21 +150,89 @@ margin:auto;
 
 {% endif %}
 
-<a class="photo-link" href="{% url 'upload_photo' %}">
-Upload / Change Photo
+<div class="username">
+{{ wallet.user.username }}
+</div>
+
+<div class="status">
+✅ Verified Account
+</div>
+
+</div>
+
+<div class="content">
+
+<a href="{% url 'upload_photo' %}" class="photo-btn">
+📷 Upload / Change Profile Photo
 </a>
 
-<h2>{{ wallet.user.username }}</h2>
+<h2 class="section-title">
+Personal Information
+</h2>
 
 <div class="info">
 
-<p><strong>Username:</strong> {{ wallet.user.username }}</p>
+<div class="item">
+<div class="label">First Name</div>
+<div class="value">{{ wallet.first_name }}</div>
+</div>
 
-<p><strong>Account Number:</strong> {{ wallet.account_number }}</p>
+<div class="item">
+<div class="label">Middle Name</div>
+<div class="value">{{ wallet.middle_name }}</div>
+</div>
 
-<p><strong>Status:</strong> Verified</p>
+<div class="item">
+<div class="label">Last Name</div>
+<div class="value">{{ wallet.last_name }}</div>
+</div>
 
-<p><strong>Balance:</strong> $500,000.00 USD</p>
+<div class="item">
+<div class="label">Date of Birth</div>
+<div class="value">{{ wallet.date_of_birth }}</div>
+</div>
+
+<div class="item">
+<div class="label">Phone Number</div>
+<div class="value">{{ wallet.phone_number }}</div>
+</div>
+
+<div class="item">
+<div class="label">Email</div>
+<div class="value">{{ wallet.user.email }}</div>
+</div>
+
+<div class="item">
+<div class="label">Country</div>
+<div class="value">{{ wallet.country }}</div>
+</div>
+
+<div class="item">
+<div class="label">State</div>
+<div class="value">{{ wallet.state }}</div>
+</div>
+
+<div class="item">
+<div class="label">City</div>
+<div class="value">{{ wallet.city }}</div>
+</div>
+
+<div class="item">
+<div class="label">Postal Code</div>
+<div class="value">{{ wallet.postal_code }}</div>
+</div>
+
+<div class="item">
+<div class="label">Account Type</div>
+<div class="value">{{ wallet.account_type }}</div>
+</div>
+
+<div class="item">
+<div class="label">Account Number</div>
+<div class="value">{{ wallet.account_number }}</div>
+</div>
+
+</div>
 
 </div>
 

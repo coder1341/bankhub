@@ -1,20 +1,170 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BankHub Online Banking</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0A49FF,#002B9A);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.card{
+background:white;
+width:100%;
+max-width:500px;
+border-radius:25px;
+padding:35px;
+box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.logo{
+text-align:center;
+font-size:40px;
+margin-bottom:10px;
+}
+
+h1{
+text-align:center;
+color:#0A49FF;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#6B7280;
+margin-bottom:30px;
+}
+
+form p{
+margin-bottom:18px;
+}
+
+form label{
+display:block;
+font-weight:600;
+margin-bottom:8px;
+color:#111827;
+}
+
+form input{
+width:100%;
+padding:18px;
+font-size:18px;
+border:2px solid #DDE5F0;
+border-radius:15px;
+}
+
+form input:focus{
+outline:none;
+border-color:#0A49FF;
+box-shadow:0 0 0 4px rgba(10,73,255,.12);
+}
+
+button{
+width:100%;
+padding:18px;
+border:none;
+border-radius:15px;
+background:linear-gradient(135deg,#0A49FF,#002B9A);
+color:white;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+opacity:.95;
+}
+
+.security{
+background:#EAF2FF;
+padding:15px;
+border-radius:12px;
+margin-top:20px;
+text-align:center;
+color:#0A49FF;
+font-weight:600;
+}
+
+.register{
+text-align:center;
+margin-top:25px;
+}
+
+.register a{
+color:#0A49FF;
+font-weight:bold;
+text-decoration:none;
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+font-size:13px;
+color:#6B7280;
+}
+
+</style>
 </head>
 <body>
 
-<h1>Login</h1>
+<div class="card">
+
+<div class="logo">
+🏦
+</div>
+
+<h1>BankHub Online Banking</h1>
+
+<p class="subtitle">
+Secure access to your banking account
+</p>
 
 <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
 
-    <button type="submit">
-        Login
-    </button>
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button type="submit">
+Login Securely
+</button>
+
 </form>
+
+<div class="security">
+🔒 Protected by BankHub Security Systems
+</div>
+
+<div class="register">
+Don't have an account?
+<br><br>
+<a href="{% url 'terms' %}">
+Open Account
+</a>
+</div>
+
+<div class="footer">
+© 2026 BankHub Digital Banking
+</div>
+
+</div>
 
 </body>
 </html>

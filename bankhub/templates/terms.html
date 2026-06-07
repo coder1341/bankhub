@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BankHub Terms & Conditions</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:#eef4ff;
+}
+
+.header{
+    background:linear-gradient(135deg,#0a49ff,#002b9a);
+    color:white;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.header h1{
+    font-size:40px;
+}
+
+.header p{
+    margin-top:10px;
+    opacity:.9;
+}
+
+.container{
+    max-width:950px;
+    margin:-30px auto 40px;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.bank-logo{
+    text-align:center;
+    font-size:35px;
+    color:#0a49ff;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+.notice{
+    background:#e8f0ff;
+    border-left:5px solid #0a49ff;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.terms-box{
+    height:350px;
+    overflow-y:auto;
+    border:1px solid #dbeafe;
+    background:#fafcff;
+    padding:20px;
+    border-radius:15px;
+    line-height:1.8;
+}
+
+.terms-box h3{
+    color:#0a49ff;
+    margin-top:15px;
+}
+
+.checkbox{
+    margin-top:25px;
+    font-size:16px;
+    font-weight:500;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.accept{
+    flex:1;
+    background:#0a49ff;
+    color:white;
+    text-decoration:none;
+    text-align:center;
+    padding:15px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.accept:hover{
+    background:#0838c7;
+}
+
+.decline{
+    flex:1;
+    background:#ef4444;
+    color:white;
+    text-decoration:none;
+    text-align:center;
+    padding:15px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.decline:hover{
+    background:#dc2626;
+}
+
+.footer{
+    text-align:center;
+    margin-top:20px;
+    color:#666;
+    font-size:14px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🏦 BankHub</h1>
+    <p>Terms & Conditions For Account Opening</p>
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<div class="bank-logo">
+BankHub Digital Banking
+</div>
+
+<div class="notice">
+⚠ Please read these Terms & Conditions carefully before creating your account.
+</div>
+
+<div class="terms-box">
+
+<h3>Account Responsibility</h3>
+<p>
+You are responsible for protecting your login credentials and account information.
+</p>
+
+<h3>Security Policy</h3>
+<p>
+Never disclose your password, PIN or account details to any third party.
+</p>
+
+<h3>Privacy Policy</h3>
+<p>
+Your information will be stored securely and used only for banking services.
+</p>
+
+<h3>Electronic Records</h3>
+<p>
+You agree that electronic records and transaction history may serve as official records.
+</p>
+
+<h3>Compliance</h3>
+<p>
+Accounts found violating policies may be restricted, suspended or terminated.
+</p>
+
+<h3>User Agreement</h3>
+<p>
+By proceeding, you confirm that all information provided during registration is accurate.
+</p>
+
+</div>
+
+<div class="checkbox">
+<input type="checkbox" id="agree">
+<label for="agree">
+I have read and agree to the BankHub Terms & Conditions
+</label>
+</div>
+
+<div class="buttons">
+
+<a href="{% url 'home' %}" class="decline">
+Decline
+</a>
+
+<a href="{% url 'register' %}" class="accept" id="continueBtn">
+Accept & Continue
+</a>
+
+</div>
+
+<div class="footer">
+© 2026 BankHub Digital Banking. All Rights Reserved.
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const btn = document.getElementById("continueBtn");
+
+btn.addEventListener("click", function(e){
+
+    if(!document.getElementById("agree").checked){
+        e.preventDefault();
+        alert("Please accept the Terms & Conditions before continuing.");
+    }
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,20 +1,216 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Register</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open BankHub Account</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#eef4ff,#f8fbff);
+    min-height:100vh;
+}
+
+.header{
+    background:linear-gradient(135deg,#0A49FF,#002B9A);
+    color:white;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.header h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.header p{
+    opacity:.9;
+}
+
+.security{
+    background:#EAF2FF;
+    color:#0A49FF;
+    padding:12px;
+    border-radius:12px;
+    margin-top:15px;
+    display:inline-block;
+    font-weight:bold;
+}
+
+.container{
+    max-width:750px;
+    margin:30px auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-top:6px solid #0A49FF;
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 15px 35px rgba(10,73,255,.12);
+}
+
+.section-title{
+    color:#0A49FF;
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+.notice{
+    background:#EAF2FF;
+    border-left:5px solid #0A49FF;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:25px;
+    color:#333;
+}
+
+form p{
+    margin-bottom:18px;
+}
+
+form label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:600;
+    color:#111827;
+}
+
+form input,
+form select{
+    width:100%;
+    padding:14px;
+    border:1px solid #DDE5F0;
+    border-radius:12px;
+    font-size:15px;
+}
+
+form input:focus{
+    outline:none;
+    border-color:#0A49FF;
+    box-shadow:0 0 0 3px rgba(10,73,255,.12);
+}
+
+button{
+    width:100%;
+    background:linear-gradient(
+    135deg,
+    #0A49FF,
+    #002B9A
+    );
+    color:white;
+    border:none;
+    padding:16px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+button:hover{
+    opacity:.95;
+}
+
+.login-link{
+    text-align:center;
+    margin-top:25px;
+}
+
+.login-link a{
+    color:#0A49FF;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.footer-note{
+    text-align:center;
+    margin-top:20px;
+    color:#6B7280;
+    font-size:14px;
+}
+
+@media(max-width:768px){
+
+.card{
+    padding:25px;
+}
+
+.header h1{
+    font-size:30px;
+}
+
+}
+
+</style>
+
 </head>
 <body>
 
-<h1>Create Account</h1>
+<div class="header">
+
+<h1>🏦 BankHub</h1>
+
+<p>Personal Banking Account Registration</p>
+
+<div class="security">
+🔒 Secure Online Account Opening
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2 class="section-title">
+Create Your Account
+</h2>
+
+<div class="notice">
+Complete the registration form below to open your BankHub account and gain access to secure online banking services.
+</div>
 
 <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
 
-    <button type="submit">
-        Register
-    </button>
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button type="submit">
+Create Account
+</button>
+
 </form>
+
+<div class="login-link">
+
+Already have an account?
+
+<br><br>
+
+<a href="{% url 'login' %}">
+Sign In
+</a>
+
+</div>
+
+<div class="footer-note">
+By creating an account you agree to the BankHub Terms & Conditions.
+</div>
+
+</div>
+
+</div>
 
 </body>
 </html>

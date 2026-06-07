@@ -1,27 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Withdraw Funds</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Withdraw Funds</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#fff7ed,#fffbeb);
+min-height:100vh;
+padding:15px;
+}
+
+.container{
+width:100%;
+max-width:100%;
+}
+
+.header{
+background:linear-gradient(135deg,#EA580C,#C2410C);
+color:white;
+padding:30px;
+border-radius:25px;
+text-align:center;
+margin-bottom:20px;
+box-shadow:0 10px 25px rgba(234,88,12,.25);
+}
+
+.header h1{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+label{
+display:block;
+font-size:18px;
+font-weight:600;
+margin-bottom:10px;
+color:#444;
+}
+
+input{
+width:100%;
+padding:22px;
+font-size:22px;
+border:2px solid #FED7AA;
+border-radius:18px;
+margin-bottom:20px;
+}
+
+input:focus{
+outline:none;
+border-color:#EA580C;
+box-shadow:0 0 0 5px rgba(234,88,12,.15);
+}
+
+button{
+width:100%;
+padding:22px;
+font-size:22px;
+font-weight:bold;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#EA580C,#C2410C);
+color:white;
+cursor:pointer;
+}
+
+.info{
+margin-top:20px;
+background:#FFF7ED;
+padding:18px;
+border-radius:15px;
+color:#9A3412;
+font-size:16px;
+font-weight:500;
+}
+
+</style>
 </head>
 <body>
 
-<h1>Withdraw Funds</h1>
+<div class="container">
+
+<div class="header">
+<h1>💳 Withdraw Funds</h1>
+<p>Secure withdrawal from your BankHub account</p>
+</div>
+
+<div class="card">
 
 <form method="POST">
 
-    {% csrf_token %}
+{% csrf_token %}
 
-    <input
-        type="number"
-        name="amount"
-        placeholder="Enter Amount"
-        required>
+<label>
+Withdrawal Amount
+</label>
 
-    <button type="submit">
-        Withdraw
-    </button>
+<input
+type="number"
+name="amount"
+placeholder="Enter Amount"
+required>
+
+<button type="submit">
+Withdraw Funds
+</button>
 
 </form>
+
+<div class="info">
+⚠ Ensure your account balance is sufficient before withdrawing.
+</div>
+
+</div>
+
+</div>
 
 </body>
 </html>

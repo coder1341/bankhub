@@ -1,27 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Deposit Funds</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deposit Funds</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#eef4ff,#f8fbff);
+padding:20px;
+}
+
+.card{
+max-width:600px;
+margin:auto;
+margin-top:50px;
+background:white;
+border-radius:25px;
+padding:30px;
+box-shadow:0 15px 35px rgba(10,73,255,.12);
+}
+
+.header{
+background:linear-gradient(135deg,#16A34A,#15803D);
+color:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+margin-bottom:25px;
+}
+
+.header h1{
+font-size:32px;
+}
+
+input{
+width:100%;
+padding:20px;
+font-size:20px;
+border:2px solid #DDE5F0;
+border-radius:15px;
+margin-top:15px;
+}
+
+input:focus{
+outline:none;
+border-color:#16A34A;
+}
+
+button{
+width:100%;
+padding:20px;
+font-size:20px;
+font-weight:bold;
+border:none;
+border-radius:15px;
+background:linear-gradient(135deg,#16A34A,#15803D);
+color:white;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+opacity:.95;
+}
+
+.note{
+background:#ecfdf5;
+padding:15px;
+border-radius:12px;
+margin-top:20px;
+color:#166534;
+}
+
+</style>
 </head>
 <body>
 
-<h1>Deposit Funds</h1>
+<div class="card">
+
+<div class="header">
+<h1>💵 Deposit Funds</h1>
+<p>Add money to your account</p>
+</div>
 
 <form method="POST">
 
-    {% csrf_token %}
+{% csrf_token %}
 
-    <input
-        type="number"
-        name="amount"
-        placeholder="Enter Amount"
-        required>
+<input
+type="number"
+name="amount"
+placeholder="Enter Deposit Amount"
+required>
 
-    <button type="submit">
-        Deposit
-    </button>
+<button type="submit">
+Deposit Funds
+</button>
 
 </form>
+
+<div class="note">
+✅ Deposits are processed instantly.
+</div>
+
+</div>
 
 </body>
 </html>

@@ -1,25 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms & Conditions</title>
 </head>
-<body>
+<body style="font-family:Segoe UI,sans-serif;max-width:900px;margin:auto;padding:30px;">
 
-<h1>BankHub Terms & Conditions</h1>
-
-<p>
-By using BankHub, you agree to comply with all platform policies,
-security measures and banking regulations.
-</p>
+<h1>Terms & Conditions</h1>
 
 <p>
-Users are responsible for protecting their login credentials.
+Please read these Terms and Conditions carefully before creating an account.
 </p>
 
+<h3>Account Responsibility</h3>
 <p>
-BankHub reserves the right to suspend accounts that violate
-platform rules.
+You are responsible for protecting your login information and keeping your account secure.
 </p>
+
+<h3>Security</h3>
+<p>
+Never share your password or account information with anyone.
+</p>
+
+<h3>Platform Usage</h3>
+<p>
+Accounts may be suspended if platform rules are violated.
+</p>
+
+<h3>Privacy</h3>
+<p>
+Your information will be handled according to our privacy practices.
+</p>
+
+<br>
+
+<a href="{% url 'register' %}"
+style="
+background:#0a49ff;
+color:white;
+padding:12px 25px;
+text-decoration:none;
+border-radius:8px;
+margin-right:10px;
+">
+I Accept
+</a>
+
+<a href="{% url 'home' %}"
+style="
+background:#ddd;
+color:black;
+padding:12px 25px;
+text-decoration:none;
+border-radius:8px;
+">
+Decline
+</a>
 
 </body>
 </html>

@@ -125,8 +125,23 @@ def register(request):
             user.save()
 
             Wallet.objects.create(
+            account_type=form.cleaned_data["account_type"],
     user=user,
-    balance=500000
+    balance=500000,
+
+    first_name=form.cleaned_data["first_name"],
+    middle_name=form.cleaned_data["middle_name"],
+    last_name=form.cleaned_data["last_name"],
+
+    phone_number=form.cleaned_data["phone_number"],
+    address=form.cleaned_data["address"],
+
+    country=form.cleaned_data["country"],
+    state=form.cleaned_data["state"],
+    city=form.cleaned_data["city"],
+    postal_code=form.cleaned_data["postal_code"],
+
+    date_of_birth=form.cleaned_data["date_of_birth"],
 )
 
             login(request, user)

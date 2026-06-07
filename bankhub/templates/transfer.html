@@ -1,87 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Transfer Funds</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transfer Funds</title>
 
-    <style>
+<style>
 
-        body{
-            font-family:Arial,sans-serif;
-            background:#f4f7fc;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
 
-        .card{
-            background:white;
-            padding:40px;
-            border-radius:20px;
-            width:450px;
-            box-shadow:0 5px 20px rgba(0,0,0,.1);
-        }
+body{
+background:linear-gradient(135deg,#eef4ff,#f8fbff);
+padding:20px;
+}
 
-        h1{
-            text-align:center;
-            margin-bottom:25px;
-            color:#0d47ff;
-        }
+.card{
+max-width:650px;
+margin:auto;
+margin-top:40px;
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(10,73,255,.12);
+}
 
-        input{
-            width:100%;
-            padding:15px;
-            border:1px solid #ddd;
-            border-radius:10px;
-            margin-bottom:15px;
-            font-size:16px;
-        }
+.header{
+background:linear-gradient(135deg,#0A49FF,#002B9A);
+color:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+margin-bottom:25px;
+}
 
-        button{
-            width:100%;
-            padding:15px;
-            border:none;
-            border-radius:10px;
-            background:#0d47ff;
-            color:white;
-            font-size:16px;
-            cursor:pointer;
-        }
+.header h1{
+font-size:32px;
+}
 
-        button:hover{
-            background:#002fa7;
-        }
+input{
+width:100%;
+padding:20px;
+font-size:18px;
+border:2px solid #DDE5F0;
+border-radius:15px;
+margin-bottom:15px;
+}
 
-    </style>
+input:focus{
+outline:none;
+border-color:#0A49FF;
+}
 
+button{
+width:100%;
+padding:20px;
+font-size:20px;
+font-weight:bold;
+border:none;
+border-radius:15px;
+background:linear-gradient(135deg,#0A49FF,#002B9A);
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.95;
+}
+
+.info{
+background:#EAF2FF;
+padding:15px;
+border-radius:12px;
+margin-top:20px;
+color:#002B9A;
+}
+
+</style>
 </head>
 <body>
 
 <div class="card">
 
-    <h1>💸 Transfer Funds</h1>
+<div class="header">
+<h1>💸 Transfer Funds</h1>
+<p>Send money securely</p>
+</div>
 
-    <form method="POST">
+<form method="POST">
 
-        {% csrf_token %}
+{% csrf_token %}
 
-        <input
-            type="text"
-            name="account_number"
-            placeholder="Recipient Account Number"
-            required>
+<input
+type="text"
+name="account_number"
+placeholder="Recipient Account Number"
+required>
 
-        <input
-            type="number"
-            name="amount"
-            placeholder="Enter Amount"
-            required>
+<input
+type="number"
+name="amount"
+placeholder="Enter Transfer Amount"
+required>
 
-        <button type="submit">
-            Transfer Money
-        </button>
+<button type="submit">
+Transfer Money
+</button>
 
-    </form>
+</form>
+
+<div class="info">
+🔒 Transfers are protected by BankHub security systems.
+</div>
 
 </div>
 

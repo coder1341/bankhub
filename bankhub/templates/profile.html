@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile</title>
+
+<style>
+
+body{
+font-family:Segoe UI,sans-serif;
+background:#f5f7fb;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
+max-width:500px;
+margin:auto;
+}
+
+.avatar{
+width:120px;
+height:120px;
+border-radius:50%;
+background:#dbeafe;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:50px;
+margin:auto;
+}
+
+h2{
+text-align:center;
+margin-top:15px;
+}
+
+.info{
+margin-top:20px;
+}
+
+.info p{
+padding:10px 0;
+border-bottom:1px solid #eee;
+}
+
+.photo-link{
+display:block;
+text-align:center;
+margin-top:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+{% if wallet.profile_picture %}
+
+<img
+src="{{ wallet.profile_picture.url }}"
+style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:auto;
+">
+
+{% else %}
+
+<div class="avatar">
+{{ wallet.user.username|slice:":1"|upper }}
+</div>
+
+{% endif %}
+
+<a class="photo-link" href="{% url 'upload_photo' %}">
+Upload / Change Photo
+</a>
+
+<h2>{{ wallet.user.username }}</h2>
+
+<div class="info">
+
+<p><strong>Username:</strong> {{ wallet.user.username }}</p>
+
+<p><strong>Account Number:</strong> {{ wallet.account_number }}</p>
+
+<p><strong>Status:</strong> Verified</p>
+
+<p><strong>Balance:</strong> $500,000.00 USD</p>
+
+</div>
+
+</div>
+
+</body>
+</html>

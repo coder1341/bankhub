@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BankHub</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+padding:15px;
+padding-bottom:90px;
+}
+
+.profile{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.avatar{
+width:60px;
+height:60px;
+border-radius:50%;
+background:#dbeafe;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:bold;
+color:#2563eb;
+}
+
+.balance-card{
+background:linear-gradient(135deg,#2563eb,#1e40af);
+color:white;
+padding:25px;
+border-radius:30px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.balance-card h1{
+font-size:36px;
+margin:10px 0;
+}
+
+.account{
+background:rgba(255,255,255,.15);
+padding:12px;
+border-radius:15px;
+margin-top:15px;
+}
+
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:20px;
+}
+
+.action{
+background:white;
+padding:20px;
+border-radius:20px;
+text-align:center;
+text-decoration:none;
+color:black;
+font-weight:bold;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.section{
+margin-top:25px;
+}
+
+.transaction{
+background:white;
+padding:15px;
+border-radius:15px;
+margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:15px;
+box-shadow:0 -5px 20px rgba(0,0,0,.1);
+}
+
+.bottom-nav a{
+text-decoration:none;
+color:#333;
+font-size:14px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="profile">
+
+<div style="display:flex;align-items:center;gap:10px;">
+
+{% if wallet.profile_picture %}
+<img
+src="{{ wallet.profile_picture.url }}"
+style="
+width:60px;
+height:60px;
+border-radius:50%;
+object-fit:cover;
+">
+{% else %}
+<div class="avatar">
+{{ wallet.user.username|slice:":1"|upper }}
+</div>
+{% endif %}
+
+<div>
+<h3>{{ wallet.user.username }}</h3>
+<p style="color:#16a34a;font-weight:bold;">
+✓ Verified Account
+</p>
+</div>
+
+</div>
+
+🔔
+
+</div>
+
+<div class="balance-card">
+
+<div style="margin-top:15px;">
+
+<form method="post" action="{% url 'logout' %}">
+{% csrf_token %}
+
+<button style="
+width:100%;
+padding:15px;
+border:none;
+border-radius:15px;
+background:#dc2626;
+color:white;
+font-weight:bold;
+cursor:pointer;">
+Logout
+</button>
+
+</form>
+
+</div>
+
+<p style="opacity:.9;">
+Available Balance
+</p>
+
+<h1>$500,000.00 USD</h1>
+
+<p style="margin-top:10px;">
+BankHub Premium Account
+</p>
+
+<p>ACCOUNT NUMBER</p>
+<strong>{{ wallet.account_number }}</strong>
+
+<br><br>
+
+<p>CARD NUMBER</p>
+<strong>**** **** **** 4582</strong>
+
+<br><br>
+
+<p>ACCOUNT TYPE</p>
+<strong>Premium Checking</strong>
+<br>
+
+<p>Virtual Card</p>
+
+<strong>
+**** **** **** 4582
+</strong>
+<p>Account Number</p>
+<strong>{{ wallet.account_number }}</strong>
+</div>
+
+</div>
+
+<div class="actions">
+
+<a href="{% url 'deposit' %}" class="action">
+📥 Deposit
+</a>
+
+<a href="{% url 'withdraw' %}" class="action">
+📤 Withdraw
+</a>
+
+<a href="{% url 'transfer' %}" class="action">
+🔄 Transfer
+</a>
+
+<a href="{% url 'profile' %}" class="action">
+👤 Profile
+</a>
+
+</div>
+
+<div class="section">
+
+<h3>Recent Activity</h3>
+
+<div class="transaction">
+<span>Account Status</span>
+<span>Active</span>
+</div>
+
+<div class="transaction">
+<span>Account Type</span>
+<span>Premium</span>
+</div>
+
+<div class="transaction">
+<span>KYC Status</span>
+<span>Verified</span>
+</div>
+
+</div>
+
+<div class="bottom-nav">
+
+<a href="{% url 'dashboard' %}">🏠 Home</a>
+
+<a href="{% url 'transactions' %}">📄 Transactions</a>
+
+<a href="{% url 'transfer' %}">🔄 Transfer</a>
+
+<a href="{% url 'profile' %}">👤 Profile</a>
+
+</div>
+
+</body>
+</html>

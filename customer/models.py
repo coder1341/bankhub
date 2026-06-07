@@ -2,14 +2,23 @@ from django.db import models
 from django.contrib.auth.models import User
 import random
 
+
 class Wallet(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     account_number = models.CharField(max_length=10, unique=True, blank=True)
 
+    profile_picture = models.ImageField(
+        upload_to="profiles/",
+        blank=True,
+        null=True
+    )
+
     def save(self, *args, **kwargs):
         if not self.account_number:
-            self.account_number = str(random.randint(1000000000, 9999999999))
+            self.account_number = str(
+                random.randint(1000000000, 9999999999)
+            )
         super().save(*args, **kwargs)
 
     def __str__(self):

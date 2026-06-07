@@ -1,9 +1,9 @@
-from django.contrib.auth import login
-from django.contrib.auth.models import User
-from .forms import RegisterForm
-from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+
+from .forms import RegisterForm
 from .models import Wallet, Transaction
 
 
@@ -11,32 +11,26 @@ from .models import Wallet, Transaction
 def dashboard(request):
     wallet = Wallet.objects.get(user=request.user)
 
-    transactions = []
-
-    if wallet:
-        transactions = Transaction.objects.filter(
-            wallet=wallet
-        ).order_by('-created_at')[:10]
+    transactions = Transaction.objects.filter(
+        wallet=wallet
+    ).order_by('-created_at')[:10]
 
     return render(
-        request,
-        'dashboard.html',
-        {
-            'wallet': wallet,
-            'transactions': transactions
-        }
-    )
+    request,
+    'dashboard_mobile.html',
+    {
+        'wallet': wallet,
+        'transactions': transactions
+    }
+)
 
 
+@login_required
 def deposit(request):
     wallet = Wallet.objects.get(user=request.user)
 
     if request.method == "POST":
-
         amount = Decimal(request.POST.get("amount"))
-
-        wallet.balance += amount
-        wallet.save()
 
         Transaction.objects.create(
             wallet=wallet,
@@ -51,15 +45,12 @@ def deposit(request):
 
 @login_required
 def withdraw(request):
+    wallet = Wallet.objects.get(user=request.user)
 
     if request.method == "POST":
-
         amount = Decimal(request.POST.get("amount"))
 
         if amount <= wallet.balance:
-
-            wallet.balance -= amount
-            wallet.save()
 
             Transaction.objects.create(
                 wallet=wallet,
@@ -77,7 +68,6 @@ def transfer(request):
     sender = Wallet.objects.get(user=request.user)
 
     if request.method == "POST":
-
         account_number = request.POST.get("account_number")
         amount = Decimal(request.POST.get("amount"))
 
@@ -87,12 +77,6 @@ def transfer(request):
             )
 
             if amount <= sender.balance:
-
-                sender.balance -= amount
-                sender.save()
-
-                receiver.balance += amount
-                receiver.save()
 
                 Transaction.objects.create(
                     wallet=sender,
@@ -130,6 +114,7 @@ def transactions(request):
         }
     )
 
+
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -139,7 +124,10 @@ def register(request):
             user.set_password(form.cleaned_data["password"])
             user.save()
 
-            Wallet.objects.create(user=user)
+            Wallet.objects.create(
+    user=user,
+    balance=500000
+)
 
             login(request, user)
 
@@ -151,5 +139,35 @@ def register(request):
     return render(
         request,
         "register.html",
-        {"form": form}
+        {
+            "form": form
+        }
+    )
+
+@login_required
+def profile(request):
+    wallet = Wallet.objects.get(user=request.user)
+
+    return render(
+        request,
+        "profile.html",
+        {
+            "wallet": wallet
+        }
+    )
+   
+@login_required
+def upload_photo(request):
+    wallet = Wallet.objects.get(user=request.user)
+
+    if request.method == "POST":
+        if "photo" in request.FILES:
+            wallet.profile_picture = request.FILES["photo"]
+            wallet.save()
+
+            return redirect("profile")
+
+    return render(
+        request,
+        "upload_photo.html"
     )

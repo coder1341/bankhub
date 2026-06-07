@@ -1,20 +1,23 @@
-
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
 from .views import home
+
 from customer.views import (
     dashboard,
+    profile,
+    upload_photo,
     deposit,
     withdraw,
     transfer,
     transactions,
-    register
+    register,
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', home, name='home'),
 
     path('register/', register, name='register'),
@@ -34,6 +37,9 @@ urlpatterns = [
     ),
 
     path('dashboard/', dashboard, name='dashboard'),
+    path('profile/', profile, name='profile'),
+    path('upload-photo/', upload_photo, name='upload_photo'),
+
     path('deposit/', deposit, name='deposit'),
     path('withdraw/', withdraw, name='withdraw'),
     path('transfer/', transfer, name='transfer'),

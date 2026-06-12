@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BankHub</title>
+<title>BankHub Dashboard</title>
 
 <style>
 
@@ -53,6 +53,17 @@ font-size:36px;
 margin:10px 0;
 }
 
+.hide-btn{
+margin-top:10px;
+padding:10px 18px;
+border:none;
+border-radius:12px;
+background:white;
+color:#1e40af;
+font-weight:bold;
+cursor:pointer;
+}
+
 .account{
 background:rgba(255,255,255,.15);
 padding:12px;
@@ -68,14 +79,29 @@ margin-top:20px;
 }
 
 .action{
-background:white;
 padding:20px;
 border-radius:20px;
 text-align:center;
 text-decoration:none;
-color:black;
+color:white;
 font-weight:bold;
 box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.deposit{
+background:linear-gradient(135deg,#16a34a,#15803d);
+}
+
+.withdraw{
+background:linear-gradient(135deg,#ea580c,#c2410c);
+}
+
+.transfer{
+background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+.profile-btn{
+background:linear-gradient(135deg,#7c3aed,#5b21b6);
 }
 
 .section{
@@ -89,6 +115,32 @@ border-radius:15px;
 margin-bottom:10px;
 display:flex;
 justify-content:space-between;
+}
+
+.support{
+background:white;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.support h3{
+color:#2563eb;
+margin-bottom:10px;
+}
+
+.support p{
+margin-bottom:8px;
+}
+
+.notice{
+background:#fff7ed;
+padding:15px;
+border-radius:15px;
+margin-top:20px;
+color:#9a3412;
+font-weight:600;
 }
 
 .bottom-nav{
@@ -108,6 +160,18 @@ text-decoration:none;
 color:#333;
 font-size:14px;
 font-weight:bold;
+}
+
+.logout-btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:15px;
+background:#dc2626;
+color:white;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:15px;
 }
 
 </style>
@@ -149,85 +213,86 @@ object-fit:cover;
 
 <div class="balance-card">
 
-<div style="margin-top:15px;">
-
 <form method="post" action="{% url 'logout' %}">
 {% csrf_token %}
-
-<button style="
-width:100%;
-padding:15px;
-border:none;
-border-radius:15px;
-background:#dc2626;
-color:white;
-font-weight:bold;
-cursor:pointer;">
+<button class="logout-btn">
 Logout
 </button>
-
 </form>
 
-</div>
+<p>Available Balance</p>
 
-<p style="opacity:.9;">
-Available Balance
-</p>
+<h1 id="balance">$500,000.00 USD</h1>
 
-<h1>$500,000.00 USD</h1>
+<button class="hide-btn" onclick="toggleBalance()">
+👁 Hide / Show Balance
+</button>
 
-<p style="margin-top:10px;">
+<p style="margin-top:15px;">
 BankHub Premium Account
 </p>
+
+<br>
 
 <p>ACCOUNT NUMBER</p>
 <strong>{{ wallet.account_number }}</strong>
 
 <br><br>
 
-<p>CARD NUMBER</p>
-<strong>**** **** **** 4582</strong>
-
-<br><br>
-
 <p>ACCOUNT TYPE</p>
-<strong>Premium Checking</strong>
-<br>
-
-<p>Virtual Card</p>
-
-<strong>
-**** **** **** 4582
-</strong>
-<p>Account Number</p>
-<strong>{{ wallet.account_number }}</strong>
-</div>
+<strong>{{ wallet.account_type }}</strong>
 
 </div>
 
 <div class="actions">
 
-<a href="{% url 'deposit' %}" class="action">
+<a href="{% url 'deposit' %}" class="action deposit">
 📥 Deposit
 </a>
 
-<a href="{% url 'withdraw' %}" class="action">
+<a href="{% url 'withdraw' %}" class="action withdraw">
 📤 Withdraw
 </a>
 
-<a href="{% url 'transfer' %}" class="action">
+<a href="{% url 'transfer' %}" class="action transfer">
 🔄 Transfer
 </a>
 
-<a href="{% url 'profile' %}" class="action">
+<a href="{% url 'profile' %}" class="action profile-btn">
 👤 Profile
 </a>
 
 </div>
 
+<div class="notice">
+🔒 Withdrawals require Transaction PIN and MFI Verification Code approval.
+</div>
+
+<div class="support">
+
+<h3>📧 Customer Support</h3>
+
+<p>
+Need an MFI Verification Code?
+</p>
+
+<p>
+Contact:
+</p>
+
+<p>
+<strong>customerservice.onlinebankingx@gmail.com</strong>
+</p>
+
+<p>
+Include your account number when requesting verification.
+</p>
+
+</div>
+
 <div class="section">
 
-<h3>Recent Activity</h3>
+<h3>Account Information</h3>
 
 <div class="transaction">
 <span>Account Status</span>
@@ -235,13 +300,13 @@ BankHub Premium Account
 </div>
 
 <div class="transaction">
-<span>Account Type</span>
-<span>Premium</span>
+<span>KYC Status</span>
+<span>Verified</span>
 </div>
 
 <div class="transaction">
-<span>KYC Status</span>
-<span>Verified</span>
+<span>Account Type</span>
+<span>{{ wallet.account_type }}</span>
 </div>
 
 </div>
@@ -257,6 +322,23 @@ BankHub Premium Account
 <a href="{% url 'profile' %}">👤 Profile</a>
 
 </div>
+
+<script>
+
+function toggleBalance() {
+
+let balance = document.getElementById("balance");
+
+if(balance.innerHTML === "$500,000.00 USD"){
+balance.innerHTML = "************";
+}
+else{
+balance.innerHTML = "$500,000.00 USD";
+}
+
+}
+
+</script>
 
 </body>
 </html>

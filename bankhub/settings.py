@@ -1,17 +1,34 @@
 """
 Django settings for bankhub project.
 """
+
+from pathlib import Path
 import os
 import dj_database_url
-from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-replace-this-with-your-own-key'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+# Database Configuration
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL)
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Application definition
 
@@ -55,12 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bankhub.wsgi.application'
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL")
-    )
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -84,7 +95,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -96,9 +108,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
-
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/dashboard/'

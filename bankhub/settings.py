@@ -1,14 +1,15 @@
 """
 Django settings for bankhub project.
 """
-
+import os
+import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-replace-this-with-your-own-key'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -55,10 +56,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bankhub.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL")
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
